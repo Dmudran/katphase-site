@@ -1,0 +1,72 @@
+* {
+.access-box p,
+.access-box li {
+  color: #d0cde7;
+  line-height: 1.7;
+}
+
+.access-box ul {
+  margin: 1rem 0 2rem 1rem;
+}
+
+.kat-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.kat-form input,
+.kat-form select,
+.kat-form textarea {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 1rem;
+  color: white;
+  font-size: 1rem;
+}
+
+.kat-form textarea {
+  min-height: 120px;
+}
+
+.kat-form button {
+  background: linear-gradient(135deg, #6a00ff, #b84cff);
+  border: none;
+  color: white;
+  padding: 1rem;
+  border-radius: 16px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.kat-form button:hover {
+  transform: scale(1.02);
+}
+
+footer {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #8d89a6;
+}
+
+@media (max-width: 768px) {
+
+  .hero-content h1 {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  section {
+    padding: 4rem 1.5rem;
+  }
+
+  .access-box {
+    padding: 2rem;
+  }
+}
