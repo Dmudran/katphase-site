@@ -1,50 +1,262 @@
 <!DOCTYPE html>
-      <h2>Acceso Anticipado</h2>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KatPhase — Acceso anticipado</title>
+  <meta name="description" content="KatPhase: zodiaco maya, afinidad espiritual, energía diaria y perfiles de gatos. Solicita acceso anticipado para Android." />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
 
-      <p>
-        KatPhase actualmente se encuentra en pruebas cerradas de Google Play.
-      </p>
+<body>
+  <canvas id="stars" class="stars-layer" aria-hidden="true"></canvas>
 
-      <p>
-        Necesitas:
-      </p>
+  <main>
+    <section class="hero hero-bg">
+      <div class="moon-circle"></div>
+      <div class="hero-glyph-ring ring-one"></div>
+      <div class="hero-glyph-ring hero-glyph-ring-2 ring-two"></div>
 
-      <ul>
-        <li>Un dispositivo Android</li>
-        <li>Una cuenta Google activa</li>
-        <li>Interés en astrología, afinidad o espiritualidad</li>
-      </ul>
+      <div class="hero-content fade-in-up">
+        <span class="section-eyebrow">Acceso anticipado Android</span>
+        <h1 class="font-ritual glow-gold">KatPhase</h1>
 
-      <form class="kat-form" action="https://docs.google.com/forms/d/e/TU_GOOGLE_FORM_ID/formResponse" method="POST" target="_blank">
+        <div class="divider-glyph">
+          <span class="glyph-accent">✦</span>
+        </div>
 
-        <input type="text" name="entry.1111111111" placeholder="Nombre o nickname" required>
+        <p class="hero-subtitle">
+          Zodiaco maya, afinidad espiritual y energía diaria para personas y gatos.
+        </p>
 
-        <input type="email" name="entry.2222222222" placeholder="Correo Gmail" required>
+        <p class="hero-copy">
+          Explora tus símbolos, descubre conexiones y observa cómo la energía del día puede acompañar tus decisiones.
+        </p>
 
-        <input type="text" name="entry.3333333333" placeholder="País">
+        <div class="hero-actions">
+          <a href="#registro" class="btn-ritual">Solicitar acceso</a>
+          <a href="#funciones" class="btn-ritual-outline">Ver funciones</a>
+        </div>
+      </div>
+    </section>
 
-        <select name="entry.4444444444" required>
-          <option value="">¿Tienes Android?</option>
-          <option value="Sí">Sí</option>
-          <option value="No">No</option>
-        </select>
+    <section class="section intro">
+      <div class="container-narrow text-center">
+        <span class="section-eyebrow">Una app ritual y simbólica</span>
+        <h2 class="font-sacred">Descubre lo que tu fecha revela</h2>
+        <p>
+          KatPhase combina calendario maya, ciclos lunares, energía elemental y afinidad entre perfiles
+          para crear una experiencia íntima de autoconocimiento.
+        </p>
+      </div>
+    </section>
 
-        <textarea name="entry.5555555555" placeholder="¿Qué te interesa más de KatPhase?"></textarea>
+    <section class="section" id="videos">
+      <div class="container-wide">
+        <div class="section-header text-center">
+          <span class="section-eyebrow">Vistazo rápido</span>
+          <h2 class="font-sacred">Videos de KatPhase</h2>
+          <p>Reemplaza estos espacios por tus videos verticales de TikTok o grabaciones de pantalla.</p>
+        </div>
 
-        <input type="text" name="entry.6666666666" placeholder="WhatsApp (opcional)">
+        <div class="video-grid">
+          <article class="video-placeholder">
+            <div class="play-orb">▶</div>
+            <h3>Tu energía maya</h3>
+            <p>¿Qué dice tu fecha de nacimiento?</p>
+          </article>
 
-        <button type="submit">
-          Solicitar acceso
-        </button>
+          <article class="video-placeholder">
+            <div class="play-orb">▶</div>
+            <h3>Afinidad espiritual</h3>
+            <p>¿Por qué algunas personas conectan y otras chocan?</p>
+          </article>
 
-      </form>
+          <article class="video-placeholder">
+            <div class="play-orb">▶</div>
+            <h3>La energía de tu gato</h3>
+            <p>Descubre sus símbolos y su afinidad contigo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
 
-    </div>
-  </section>
+    <section class="section" id="funciones">
+      <div class="container-wide">
+        <div class="section-header text-center">
+          <span class="section-eyebrow">Funcionalidades</span>
+          <h2 class="font-sacred">Qué puedes explorar</h2>
+        </div>
 
-  <footer>
-    <p>KatPhase — Zodiaco Maya • Afinidad • Energía</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <span class="feature-icon">☀</span>
+            <h3>Energía diaria</h3>
+            <p>Consulta el Tzolkin del día, la fase lunar y la tendencia elemental.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">✦</span>
+            <h3>Zodiaco maya</h3>
+            <p>Descubre símbolos, animales y energías asociadas a fechas importantes.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">☌</span>
+            <h3>Afinidad</h3>
+            <p>Explora compatibilidad, tensiones y resonancias entre perfiles.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">🐈</span>
+            <h3>Perfiles de gatos</h3>
+            <p>Crea perfiles para tus gatos o personas cercanas y observa sus signos.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">◐</span>
+            <h3>Fase lunar</h3>
+            <p>Observa la luna actual y cómo acompaña la energía del día.</p>
+          </article>
+
+          <article class="feature-card">
+            <span class="feature-icon">△</span>
+            <h3>Tendencia elemental</h3>
+            <p>Revisa proporciones elementales y su posible influencia cotidiana.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section screenshots">
+      <div class="container-wide">
+        <div class="section-header text-center">
+          <span class="section-eyebrow">Interfaz</span>
+          <h2 class="font-sacred">Capturas de la app</h2>
+          <p>Reemplaza estos marcos por capturas reales: Home, Menú, Perfil y Afinidad.</p>
+        </div>
+
+        <div class="screenshot-track">
+          <div class="screenshot-frame"><span>Home<br><small>Tzolkin • Luna • Elementos</small></span></div>
+          <div class="screenshot-frame"><span>Perfil<br><small>Signos y animales</small></span></div>
+          <div class="screenshot-frame"><span>Afinidad<br><small>Cards desplegables</small></span></div>
+          <div class="screenshot-frame"><span>Menú<br><small>Perfiles y exploración</small></span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section access-bg" id="registro">
+      <div class="container-narrow">
+        <div class="access-card">
+          <div class="text-center">
+            <span class="section-eyebrow">Prueba cerrada Google Play</span>
+            <h2 class="font-sacred">Solicita acceso anticipado</h2>
+            <p>
+              KatPhase está en prueba cerrada para Android. Para poder instalarla,
+              necesitamos agregar tu cuenta Google a la lista oficial de testers.
+            </p>
+          </div>
+
+          <div class="requirements">
+            <div><strong>Necesitas:</strong></div>
+            <ul>
+              <li>Un teléfono Android.</li>
+              <li>Una cuenta Gmail activa.</li>
+              <li>Usar esa misma cuenta en Google Play Store.</li>
+            </ul>
+          </div>
+
+          <div class="reward-box">
+            ✨ Los testers activos que usen la app durante varios días podrán recibir una recompensa simbólica de acceso anticipado.
+          </div>
+
+          <form class="kat-form" action="https://docs.google.com/forms/d/e/TU_GOOGLE_FORM_ID/formResponse" method="POST" target="_blank">
+            <div class="form-field">
+              <label class="form-label">Nombre o nickname</label>
+              <input class="form-input" type="text" name="entry.1111111111" placeholder="Ej: Luna, Vale, Ric..." required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">Correo Gmail</label>
+              <input class="form-input" type="email" name="entry.2222222222" placeholder="Debe ser el Gmail de tu Android" required>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">País</label>
+              <input class="form-input" type="text" name="entry.3333333333" placeholder="Ej: Chile, México, España...">
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">¿Tienes teléfono Android?</label>
+              <select class="form-select" name="entry.4444444444" required>
+                <option value="">Selecciona una opción</option>
+                <option value="Sí">Sí, tengo Android</option>
+                <option value="No">No, no tengo Android</option>
+              </select>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">¿Qué te interesa más?</label>
+              <textarea class="form-textarea" name="entry.5555555555" placeholder="Afinidad, gatos, zodiaco maya, energía diaria, autoconocimiento..."></textarea>
+            </div>
+
+            <div class="form-field">
+              <label class="form-label">WhatsApp opcional</label>
+              <input class="form-input" type="text" name="entry.6666666666" placeholder="Para enviarte instrucciones rápidas">
+            </div>
+
+            <button type="submit" class="btn-ritual form-submit">Enviar solicitud</button>
+          </form>
+
+          <p class="fine-print">
+            Si eres seleccionado/a, recibirás el link oficial de Google Play para aceptar ser tester e instalar KatPhase.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer-bg">
+    <p>KatPhase — Zodiaco maya • Afinidad • Energía • Gatos</p>
   </footer>
 
+  <script>
+    const canvas = document.getElementById("stars");
+    const ctx = canvas.getContext("2d");
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = Array.from({ length: Math.min(120, Math.floor(window.innerWidth / 8)) }, () => ({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 1.4 + 0.2,
+        a: Math.random() * 0.7 + 0.15,
+        s: Math.random() * 0.35 + 0.05
+      }));
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (const star of stars) {
+        star.a += star.s * 0.01;
+        const opacity = 0.25 + Math.abs(Math.sin(star.a)) * 0.55;
+        ctx.beginPath();
+        ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(232, 201, 107, ${opacity})`;
+        ctx.fill();
+      }
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+    drawStars();
+  </script>
 </body>
 </html>
