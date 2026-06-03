@@ -10,6 +10,124 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* Fase 2 — Capturas reales de la app */
+    .screenshots .container-wide {
+      max-width: 1240px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .screenshot-track-real {
+      width: min(100%, 1180px);
+      margin: 4rem auto 0;
+      display: grid;
+      grid-template-columns: repeat(5, minmax(165px, 1fr));
+      gap: 1.25rem;
+      justify-content: center;
+      align-items: stretch;
+    }
+
+    .screenshot-card {
+      position: relative;
+      min-height: 420px;
+      padding: 0;
+      overflow: hidden;
+      isolation: isolate;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 28px;
+      background:
+        radial-gradient(circle at 50% 22%, rgba(232, 201, 107, 0.12), transparent 34%),
+        linear-gradient(180deg, rgba(34, 21, 66, 0.96), rgba(16, 10, 34, 0.96));
+      border: 1px solid rgba(232, 201, 107, 0.18);
+      box-shadow: 0 28px 70px rgba(0, 0, 0, 0.24);
+    }
+
+    .screenshot-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      opacity: 0.46;
+      filter: saturate(0.86) contrast(0.96) brightness(0.74);
+      transform: scale(1.015);
+      z-index: -2;
+    }
+
+    .screenshot-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(9, 4, 24, 0.22), rgba(9, 4, 24, 0.62)),
+        radial-gradient(circle at 50% 58%, rgba(14, 7, 35, 0.16), rgba(7, 3, 18, 0.68));
+      z-index: -1;
+    }
+
+    .screenshot-label {
+      position: relative;
+      display: block;
+      width: 100%;
+      padding: 1.1rem 0.85rem;
+      text-align: center;
+      color: #f2d66e;
+      font-family: "Cinzel", serif;
+      font-size: clamp(1rem, 1.2vw, 1.25rem);
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, 0.92);
+      background: linear-gradient(90deg, transparent, rgba(8, 4, 22, 0.50), transparent);
+    }
+
+    .screenshot-label small {
+      display: block;
+      margin-top: 0.55rem;
+      color: rgba(255, 246, 213, 0.86);
+      font-family: "Raleway", sans-serif;
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      text-transform: none;
+      line-height: 1.35;
+    }
+
+    @media (max-width: 1120px) {
+      .screenshot-track-real {
+        grid-template-columns: repeat(3, minmax(190px, 1fr));
+        max-width: 780px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .screenshot-track-real {
+        grid-template-columns: repeat(2, minmax(145px, 1fr));
+        gap: 1rem;
+        margin-top: 2.75rem;
+      }
+
+      .screenshot-card {
+        min-height: 340px;
+        border-radius: 24px;
+      }
+    }
+
+    @media (max-width: 460px) {
+      .screenshot-track-real {
+        grid-template-columns: 1fr;
+        max-width: 260px;
+      }
+
+      .screenshot-card {
+        min-height: 430px;
+      }
+    }
+  </style>
 </head>
 
 <body>
@@ -140,11 +258,31 @@
           <p>Reemplaza estos marcos por capturas reales: Home, Menú, Perfil y Afinidad.</p>
         </div>
 
-        <div class="screenshot-track">
-          <div class="screenshot-frame"><span>Home<br><small>Tzolkin • Luna • Elementos</small></span></div>
-          <div class="screenshot-frame"><span>Perfil<br><small>Signos y animales</small></span></div>
-          <div class="screenshot-frame"><span>Afinidad<br><small>Cards desplegables</small></span></div>
-          <div class="screenshot-frame"><span>Menú<br><small>Perfiles y exploración</small></span></div>
+        <div class="screenshot-track screenshot-track-real">
+          <article class="screenshot-frame screenshot-card">
+            <img src="assets/screenshots/home.webp" alt="Captura Home de KatPhase" loading="lazy">
+            <span class="screenshot-label">Home<br><small>Tzolkin • Luna • Elementos</small></span>
+          </article>
+
+          <article class="screenshot-frame screenshot-card">
+            <img src="assets/screenshots/perfil.webp" alt="Captura Perfil de Usuario de KatPhase" loading="lazy">
+            <span class="screenshot-label">Perfil<br><small>Signos y cuenta</small></span>
+          </article>
+
+          <article class="screenshot-frame screenshot-card">
+            <img src="assets/screenshots/afinidad.webp" alt="Captura Afinidad de KatPhase" loading="lazy">
+            <span class="screenshot-label">Afinidad<br><small>Elementos • Sintonía</small></span>
+          </article>
+
+          <article class="screenshot-frame screenshot-card">
+            <img src="assets/screenshots/menu.webp" alt="Captura Menú de KatPhase" loading="lazy">
+            <span class="screenshot-label">Menú<br><small>Exploración ritual</small></span>
+          </article>
+
+          <article class="screenshot-frame screenshot-card">
+            <img src="assets/screenshots/misgatos.webp" alt="Captura Mis Gatos de KatPhase" loading="lazy">
+            <span class="screenshot-label">Mis Gatos<br><small>Perfiles felinos</small></span>
+          </article>
         </div>
       </div>
     </section>
@@ -174,11 +312,7 @@
             ✨ Los testers activos que usen la app durante varios días podrán recibir una recompensa simbólica de acceso anticipado.
           </div>
 
-          <form id="katphase-access-form" class="kat-form" action="https://docs.google.com/forms/d/e/1FAIpQLSepOduNSe9a3vcKOaDMQNBRdKTdi10CmK0g9gkFWZjfR-ZvVg/formResponse" method="POST" target="hidden-form-frame">
-            <div aria-hidden="true" style="position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;">
-              <label for="website">No completar este campo</label>
-              <input id="website" type="text" name="website" tabindex="-1" autocomplete="off">
-            </div>
+          <form class="kat-form" action="https://docs.google.com/forms/d/e/1FAIpQLSepOduNSe9a3vcKOaDMQNBRdKTdi10CmK0g9gkFWZjfR-ZvVg/formResponse" method="POST" target="_blank">
             <div class="form-field">
               <label class="form-label">Nombre o nickname</label>
               <input class="form-input" type="text" name="entry.1545451809" placeholder="Ej: Luna, Vale, Ric..." required>
@@ -216,13 +350,6 @@
             <button type="submit" class="btn-ritual form-submit">Enviar solicitud</button>
           </form>
 
-          <iframe
-            name="hidden-form-frame"
-            id="hidden-form-frame"
-            title="Envío oculto del formulario"
-            style="display:none; width:0; height:0; border:0;"
-          ></iframe>
-
           <p class="fine-print">
             Si eres seleccionado/a, recibirás el link oficial de Google Play para aceptar ser tester e instalar KatPhase.
           </p>
@@ -230,99 +357,6 @@
       </div>
     </section>
   </main>
-
-
-  <div id="success-modal" class="success-modal" aria-hidden="true">
-    <div class="success-modal-backdrop" data-close-modal></div>
-    <div class="success-modal-card" role="dialog" aria-modal="true" aria-labelledby="success-modal-title">
-      <button class="success-modal-close" type="button" aria-label="Cerrar mensaje" data-close-modal>×</button>
-      <div class="success-modal-icon">✦</div>
-      <h2 id="success-modal-title" class="font-sacred">Solicitud registrada</h2>
-      <p>Gracias. Hemos recibido tu solicitud de acceso anticipado a KatPhase.</p>
-      <p class="success-modal-note">Si cumples los requisitos de la prueba cerrada, usaremos tu correo Gmail para agregarte como tester en Google Play.</p>
-      <button class="btn-ritual success-modal-button" type="button" data-close-modal>Entendido</button>
-    </div>
-  </div>
-
-  <style>
-    .success-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 1.5rem;
-    }
-
-    .success-modal.is-visible {
-      display: flex;
-    }
-
-    .success-modal-backdrop {
-      position: absolute;
-      inset: 0;
-      background: rgba(3, 3, 12, 0.78);
-      backdrop-filter: blur(8px);
-    }
-
-    .success-modal-card {
-      position: relative;
-      width: min(92vw, 480px);
-      padding: 2.25rem;
-      border: 1px solid rgba(232, 201, 107, 0.36);
-      border-radius: 28px;
-      background:
-        radial-gradient(circle at top, rgba(184, 76, 255, 0.22), transparent 45%),
-        linear-gradient(145deg, rgba(18, 14, 37, 0.98), rgba(8, 7, 20, 0.98));
-      color: #f8f1d7;
-      text-align: center;
-      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
-    }
-
-    .success-modal-close {
-      position: absolute;
-      top: 0.85rem;
-      right: 1rem;
-      border: 0;
-      background: transparent;
-      color: #f8f1d7;
-      font-size: 2rem;
-      line-height: 1;
-      cursor: pointer;
-    }
-
-    .success-modal-icon {
-      width: 58px;
-      height: 58px;
-      margin: 0 auto 1rem;
-      display: grid;
-      place-items: center;
-      border-radius: 50%;
-      background: rgba(232, 201, 107, 0.14);
-      color: #e8c96b;
-      font-size: 1.6rem;
-      box-shadow: 0 0 28px rgba(232, 201, 107, 0.28);
-    }
-
-    .success-modal-card h2 {
-      margin: 0 0 0.85rem;
-    }
-
-    .success-modal-card p {
-      color: #ded8f3;
-      line-height: 1.65;
-    }
-
-    .success-modal-note {
-      font-size: 0.95rem;
-      opacity: 0.86;
-    }
-
-    .success-modal-button {
-      margin-top: 1.1rem;
-    }
-  </style>
 
   <footer class="footer-bg">
     <p>KatPhase — Zodiaco maya • Afinidad • Energía • Gatos</p>
@@ -361,66 +395,6 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     drawStars();
-
-    const accessForm = document.getElementById("katphase-access-form");
-    const hiddenFrame = document.getElementById("hidden-form-frame");
-    const successModal = document.getElementById("success-modal");
-    const submitButton = accessForm?.querySelector(".form-submit");
-    const honeypot = document.getElementById("website");
-    let formWasSubmitted = false;
-
-    function openSuccessModal() {
-      if (!successModal) return;
-      successModal.classList.add("is-visible");
-      successModal.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
-    }
-
-    function closeSuccessModal() {
-      if (!successModal) return;
-      successModal.classList.remove("is-visible");
-      successModal.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
-    }
-
-    accessForm?.addEventListener("submit", function(event) {
-      if (honeypot && honeypot.value.trim() !== "") {
-        event.preventDefault();
-        return;
-      }
-
-      formWasSubmitted = true;
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Enviando...";
-      }
-    });
-
-    hiddenFrame?.addEventListener("load", function() {
-      if (!formWasSubmitted) return;
-
-      formWasSubmitted = false;
-      accessForm?.reset();
-
-      if (submitButton) {
-        submitButton.disabled = false;
-        submitButton.textContent = "Enviar solicitud";
-      }
-
-      openSuccessModal();
-    });
-
-    document.querySelectorAll("[data-close-modal]").forEach((button) => {
-      button.addEventListener("click", closeSuccessModal);
-    });
-
-    document.addEventListener("keydown", function(event) {
-      if (event.key === "Escape") {
-        closeSuccessModal();
-      }
-    });
-
   </script>
 </body>
 </html>
