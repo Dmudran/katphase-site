@@ -675,6 +675,47 @@ body.video-modal-open {
   width: 100%;
 }
 
+
+.form-target-frame {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-status {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(201, 168, 76, 0.28);
+  border-radius: 4px;
+  background: rgba(201, 168, 76, 0.08);
+  color: var(--color-cream);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.form-status.is-visible {
+  display: block;
+}
+
+.form-input:disabled,
+.form-select:disabled,
+.form-textarea:disabled {
+  opacity: 0.58;
+  cursor: not-allowed;
+}
+
+.form-submit:disabled,
+.form-submit.is-submitted {
+  opacity: 0.74;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
 .fine-print {
   margin-top: 1.35rem;
   font-size: 0.86rem !important;
