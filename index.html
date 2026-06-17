@@ -312,7 +312,7 @@
             ✨ Los testers activos que usen la app durante varios días podrán recibir una recompensa simbólica de acceso anticipado.
           </div>
 
-          <form class="kat-form" action="https://docs.google.com/forms/d/e/1FAIpQLSepOduNSe9a3vcKOaDMQNBRdKTdi10CmK0g9gkFWZjfR-ZvVg/formResponse" method="POST" target="_blank">
+          <form class="kat-form" id="katphaseAccessForm" action="https://docs.google.com/forms/d/e/1FAIpQLSepOduNSe9a3vcKOaDMQNBRdKTdi10CmK0g9gkFWZjfR-ZvVg/formResponse" method="POST" target="katphaseFormTarget">
             <div class="form-field">
               <label class="form-label">Nombre o nickname</label>
               <input class="form-input" type="text" name="entry.1545451809" placeholder="Ej: Luna, Vale, Ric..." required>
@@ -347,8 +347,12 @@
               <input class="form-input" type="text" name="entry.68455837" placeholder="Para enviarte instrucciones rápidas">
             </div>
 
-            <button type="submit" class="btn-ritual form-submit">Enviar solicitud</button>
+            <button type="submit" class="btn-ritual form-submit" id="katphaseFormSubmit">Enviar solicitud</button>
           </form>
+
+          <iframe name="katphaseFormTarget" class="form-target-frame" title="Envío de solicitud KatPhase"></iframe>
+
+          <p class="form-status" id="katphaseFormStatus" aria-live="polite"></p>
 
           <p class="fine-print">
             Si eres seleccionado/a, recibirás el link oficial de Google Play para aceptar ser tester e instalar KatPhase.
@@ -452,6 +456,60 @@
         closeVideoModal();
       }
     });
+
+
+    const katphaseForm = document.getElementById("katphaseAccessForm");
+    const katphaseFormSubmit = document.getElementById("katphaseFormSubmit");
+    const katphaseFormStatus = document.getElementById("katphaseFormStatus");
+    const katphaseFormStorageKey = "katphase_access_request_sent";
+
+    function lockKatphaseForm() {
+      if (!katphaseForm || !katphaseFormSubmit) return;
+
+      katphaseFormSubmit.disabled = true;
+      katphaseFormSubmit.textContent = "Solicitud enviada";
+      katphaseFormSubmit.classList.add("is-submitted");
+
+      katphaseForm.querySelectorAll("input, select, textarea").forEach((field) => {
+        field.disabled = true;
+      });
+
+      if (katphaseFormStatus) {
+        katphaseFormStatus.textContent = "Gracias. Tu solicitud fue enviada. Si eres seleccionado/a, recibirás instrucciones para acceder a KatPhase.";
+        katphaseFormStatus.classList.add("is-visible");
+      }
+    }
+
+    if (katphaseForm && katphaseFormSubmit) {
+      if (localStorage.getItem(katphaseFormStorageKey) === "true") {
+        katphaseForm.reset();
+        lockKatphaseForm();
+      }
+
+      katphaseForm.addEventListener("submit", (event) => {
+        if (!katphaseForm.checkValidity()) return;
+
+        if (localStorage.getItem(katphaseFormStorageKey) === "true") {
+          event.preventDefault();
+          lockKatphaseForm();
+          return;
+        }
+
+        localStorage.setItem(katphaseFormStorageKey, "true");
+        katphaseFormSubmit.disabled = true;
+        katphaseFormSubmit.textContent = "Enviando...";
+
+        if (katphaseFormStatus) {
+          katphaseFormStatus.textContent = "Enviando tu solicitud...";
+          katphaseFormStatus.classList.add("is-visible");
+        }
+
+        window.setTimeout(() => {
+          katphaseForm.reset();
+          lockKatphaseForm();
+        }, 900);
+      });
+    }
   </script>
 </body>
 </html>
