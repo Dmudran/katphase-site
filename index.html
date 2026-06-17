@@ -182,23 +182,23 @@
         </div>
 
         <div class="video-grid">
-          <article class="video-placeholder">
+          <button class="video-placeholder video-trigger" type="button" data-video-id="HJHCefBeyfY" aria-label="Reproducir video Tu energía maya">
             <div class="play-orb">▶</div>
             <h3>Tu energía maya</h3>
             <p>¿Qué dice tu fecha de nacimiento?</p>
-          </article>
+          </button>
 
-          <article class="video-placeholder">
+          <button class="video-placeholder video-trigger" type="button" data-video-id="nyu6LUuk3vA" aria-label="Reproducir video Afinidad espiritual">
             <div class="play-orb">▶</div>
             <h3>Afinidad espiritual</h3>
             <p>¿Por qué algunas personas conectan y otras chocan?</p>
-          </article>
+          </button>
 
-          <article class="video-placeholder">
+          <button class="video-placeholder video-trigger" type="button" data-video-id="C91vKrY4he8" aria-label="Reproducir video La energía de tu gato">
             <div class="play-orb">▶</div>
             <h3>La energía de tu gato</h3>
             <p>Descubre sus símbolos y su afinidad contigo.</p>
-          </article>
+          </button>
         </div>
       </div>
     </section>
@@ -362,6 +362,24 @@
     <p>KatPhase — Zodiaco maya • Afinidad • Energía • Gatos</p>
   </footer>
 
+  <div class="video-modal" id="videoModal" aria-hidden="true">
+    <div class="video-modal-backdrop" data-close-video></div>
+
+    <div class="video-modal-content" role="dialog" aria-modal="true" aria-label="Video de KatPhase">
+      <button class="video-modal-close" type="button" data-close-video aria-label="Cerrar video">×</button>
+
+      <div class="video-modal-frame">
+        <iframe
+          id="katphaseVideoFrame"
+          title="Video de KatPhase"
+          src=""
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </div>
+  </div>
+
   <script>
     const canvas = document.getElementById("stars");
     const ctx = canvas.getContext("2d");
@@ -395,6 +413,45 @@
     window.addEventListener("resize", resizeCanvas);
     resizeCanvas();
     drawStars();
+
+    const videoModal = document.getElementById("videoModal");
+    const videoFrame = document.getElementById("katphaseVideoFrame");
+    const videoTriggers = document.querySelectorAll(".video-trigger");
+    const closeVideoButtons = document.querySelectorAll("[data-close-video]");
+
+    function openVideoModal(videoId) {
+      if (!videoId || !videoModal || !videoFrame) return;
+
+      videoFrame.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+      videoModal.classList.add("is-open");
+      videoModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("video-modal-open");
+    }
+
+    function closeVideoModal() {
+      if (!videoModal || !videoFrame) return;
+
+      videoModal.classList.remove("is-open");
+      videoModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("video-modal-open");
+      videoFrame.src = "";
+    }
+
+    videoTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", () => {
+        openVideoModal(trigger.dataset.videoId);
+      });
+    });
+
+    closeVideoButtons.forEach((button) => {
+      button.addEventListener("click", closeVideoModal);
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && videoModal && videoModal.classList.contains("is-open")) {
+        closeVideoModal();
+      }
+    });
   </script>
 </body>
 </html>
