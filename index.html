@@ -155,6 +155,14 @@
           Explora tus símbolos, descubre conexiones y observa cómo la energía del día puede acompañar tus decisiones.
         </p>
 
+        <div class="google-hero-access" aria-label="Solicitud rápida con Google">
+          <div id="googleAccessButtonContainer" class="google-access-button-container"></div>
+          <p class="google-access-note">
+            Prueba cerrada exclusiva para Android. Usa el mismo Gmail que tienes activo en Google Play Store.
+          </p>
+          <p class="google-access-status" id="googleAccessStatus" aria-live="polite"></p>
+        </div>
+
         <div class="hero-actions">
           <a href="#registro" class="btn-ritual">Solicitar acceso</a>
           <a href="#funciones" class="btn-ritual-outline">Ver funciones</a>
@@ -350,6 +358,22 @@
             <button type="submit" class="btn-ritual form-submit" id="katphaseFormSubmit">Enviar solicitud</button>
           </form>
 
+          <form
+            id="katphaseGoogleAccessForm"
+            action="https://docs.google.com/forms/d/e/1FAIpQLSepOduNSe9a3vcKOaDMQNBRdKTdi10CmK0g9gkFWZjfR-ZvVg/formResponse"
+            method="POST"
+            target="katphaseFormTarget"
+            class="hidden-google-form"
+            aria-hidden="true"
+          >
+            <input type="hidden" name="entry.1545451809" id="googleFormName">
+            <input type="hidden" name="entry.1143592437" id="googleFormEmail">
+            <input type="hidden" name="entry.1618902750" id="googleFormCountry">
+            <input type="hidden" name="entry.1527653490" id="googleFormAndroid">
+            <input type="hidden" name="entry.402968648" id="googleFormInterest">
+            <input type="hidden" name="entry.68455837" id="googleFormWhatsapp">
+          </form>
+
           <iframe name="katphaseFormTarget" class="form-target-frame" title="Envío de solicitud KatPhase"></iframe>
 
           <p class="form-status" id="katphaseFormStatus" aria-live="polite"></p>
@@ -365,6 +389,22 @@
   <footer class="footer-bg">
     <p>KatPhase — Zodiaco maya • Afinidad • Energía • Gatos</p>
   </footer>
+
+  <div class="access-success-modal" id="accessSuccessModal" aria-hidden="true">
+    <div class="access-success-backdrop" data-close-access-success></div>
+
+    <div class="access-success-content" role="dialog" aria-modal="true" aria-label="Solicitud recibida">
+      <button class="access-success-close" type="button" data-close-access-success aria-label="Cerrar mensaje">×</button>
+
+      <div class="success-orb" aria-hidden="true">✦</div>
+      <h2 class="font-sacred">Solicitud recibida</h2>
+      <p>
+        Usaremos el Gmail registrado para agregarte a la lista de testers de KatPhase.
+        Recibirás pronto el link de Google Play y las instrucciones para descargar la app.
+      </p>
+      <p class="success-email" id="accessSuccessEmail"></p>
+    </div>
+  </div>
 
   <div class="video-modal" id="videoModal" aria-hidden="true">
     <div class="video-modal-backdrop" data-close-video></div>
@@ -383,6 +423,8 @@
       </div>
     </div>
   </div>
+
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
 
   <script>
     const canvas = document.getElementById("stars");
@@ -455,7 +497,159 @@
       if (event.key === "Escape" && videoModal && videoModal.classList.contains("is-open")) {
         closeVideoModal();
       }
+
+      if (event.key === "Escape" && accessSuccessModal && accessSuccessModal.classList.contains("is-open")) {
+        closeAccessSuccessModal();
+      }
     });
+
+
+    const GOOGLE_CLIENT_ID = "TU_GOOGLE_CLIENT_ID";
+    const accessSuccessMessage = "Solicitud recibida ✨ Usaremos el Gmail registrado para agregarte a la lista de testers de KatPhase. Recibirás pronto el link de Google Play y las instrucciones para descargar la app.";
+
+    const googleAccessButtonContainer = document.getElementById("googleAccessButtonContainer");
+    const googleAccessStatus = document.getElementById("googleAccessStatus");
+    const katphaseGoogleAccessForm = document.getElementById("katphaseGoogleAccessForm");
+    const accessSuccessModal = document.getElementById("accessSuccessModal");
+    const accessSuccessEmail = document.getElementById("accessSuccessEmail");
+    const closeAccessSuccessButtons = document.querySelectorAll("[data-close-access-success]");
+
+    const katphaseGoogleStorageKey = "katphase_google_access_request_sent";
+    const katphaseGoogleEmailStorageKey = "katphase_google_access_email";
+
+    function openAccessSuccessModal(email) {
+      if (!accessSuccessModal) return;
+
+      if (accessSuccessEmail) {
+        accessSuccessEmail.textContent = email ? `Gmail registrado: ${email}` : "";
+      }
+
+      accessSuccessModal.classList.add("is-open");
+      accessSuccessModal.setAttribute("aria-hidden", "false");
+      document.body.classList.add("access-success-modal-open");
+    }
+
+    function closeAccessSuccessModal() {
+      if (!accessSuccessModal) return;
+
+      accessSuccessModal.classList.remove("is-open");
+      accessSuccessModal.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("access-success-modal-open");
+    }
+
+    closeAccessSuccessButtons.forEach((button) => {
+      button.addEventListener("click", closeAccessSuccessModal);
+    });
+
+    function setGoogleAccessStatus(message, type = "info") {
+      if (!googleAccessStatus) return;
+
+      googleAccessStatus.textContent = message || "";
+      googleAccessStatus.classList.toggle("is-visible", Boolean(message));
+      googleAccessStatus.dataset.status = type;
+    }
+
+    function parseJwt(token) {
+      try {
+        const base64Url = token.split(".")[1];
+        const base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+        const jsonPayload = decodeURIComponent(
+          atob(base64)
+            .split("")
+            .map((char) => `%${("00" + char.charCodeAt(0).toString(16)).slice(-2)}`)
+            .join("")
+        );
+
+        return JSON.parse(jsonPayload);
+      } catch (error) {
+        console.error("No fue posible leer la respuesta de Google.", error);
+        return null;
+      }
+    }
+
+    function submitGoogleAccessRequest({ name, email }) {
+      if (!katphaseGoogleAccessForm || !email) {
+        setGoogleAccessStatus("No pudimos registrar tu Gmail con Google. Puedes usar el formulario manual.", "error");
+        return;
+      }
+
+      document.getElementById("googleFormName").value = name || "Cuenta Google";
+      document.getElementById("googleFormEmail").value = email;
+      document.getElementById("googleFormCountry").value = "No informado";
+      document.getElementById("googleFormAndroid").value = "No informado - acceso con Google";
+      document.getElementById("googleFormInterest").value = "Solicitud rápida con cuenta Google";
+      document.getElementById("googleFormWhatsapp").value = "";
+
+      localStorage.setItem(katphaseGoogleStorageKey, "true");
+      localStorage.setItem(katphaseGoogleEmailStorageKey, email);
+
+      katphaseGoogleAccessForm.submit();
+
+      setGoogleAccessStatus(`Solicitud enviada con ${email}.`, "success");
+      openAccessSuccessModal(email);
+    }
+
+    function handleGoogleAccessCredential(response) {
+      if (!response || !response.credential) {
+        setGoogleAccessStatus("No pudimos completar el acceso con Google. Puedes usar el formulario manual.", "error");
+        return;
+      }
+
+      const profile = parseJwt(response.credential);
+
+      if (!profile || !profile.email) {
+        setGoogleAccessStatus("Google no entregó un Gmail válido. Puedes usar el formulario manual.", "error");
+        return;
+      }
+
+      submitGoogleAccessRequest({
+        name: profile.name,
+        email: profile.email
+      });
+    }
+
+    function initGoogleAccessButton(retries = 0) {
+      if (!googleAccessButtonContainer) return;
+
+      if (!GOOGLE_CLIENT_ID || GOOGLE_CLIENT_ID === "TU_GOOGLE_CLIENT_ID") {
+        googleAccessButtonContainer.innerHTML = '<button type="button" class="google-config-placeholder" disabled>Solicita acceso con Google</button>';
+        setGoogleAccessStatus("Botón Google pendiente de configurar con OAuth Client ID.", "info");
+        return;
+      }
+
+      if (!window.google || !google.accounts || !google.accounts.id) {
+        if (retries < 20) {
+          window.setTimeout(() => initGoogleAccessButton(retries + 1), 250);
+        } else {
+          setGoogleAccessStatus("No se pudo cargar Google. Puedes usar el formulario manual.", "error");
+        }
+        return;
+      }
+
+      google.accounts.id.initialize({
+        client_id: GOOGLE_CLIENT_ID,
+        callback: handleGoogleAccessCredential
+      });
+
+      google.accounts.id.renderButton(
+        googleAccessButtonContainer,
+        {
+          theme: "outline",
+          size: "large",
+          shape: "pill",
+          text: "continue_with",
+          width: 360,
+          locale: "es"
+        }
+      );
+
+      const previousGoogleEmail = localStorage.getItem(katphaseGoogleEmailStorageKey);
+      if (localStorage.getItem(katphaseGoogleStorageKey) === "true" && previousGoogleEmail) {
+        setGoogleAccessStatus(`Ya recibimos una solicitud con ${previousGoogleEmail}.`, "success");
+      }
+    }
+
+    window.addEventListener("load", () => initGoogleAccessButton());
 
 
     const katphaseForm = document.getElementById("katphaseAccessForm");
@@ -475,7 +669,7 @@
       });
 
       if (katphaseFormStatus) {
-        katphaseFormStatus.textContent = "Gracias. Tu solicitud fue enviada. Si eres seleccionado/a, recibirás instrucciones para acceder a KatPhase.";
+        katphaseFormStatus.textContent = accessSuccessMessage;
         katphaseFormStatus.classList.add("is-visible");
       }
     }
