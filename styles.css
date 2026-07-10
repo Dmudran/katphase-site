@@ -942,4 +942,376 @@ body.access-success-modal-open {
   }
 }
 
+/* =========================================================
+   HERO DIVIDIDO — MENSAJE + REGISTRO RÁPIDO
+   ========================================================= */
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: clamp(5rem, 9vh, 8rem) 1.5rem;
+}
+
+.hero-shell {
+  position: relative;
+  z-index: 5;
+  width: min(1180px, 100%);
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 6.5rem);
+  text-align: left;
+}
+
+.hero-message {
+  min-width: 0;
+}
+
+.hero-message .section-eyebrow {
+  margin-bottom: 1rem;
+}
+
+.hero-content h1 {
+  font-size: clamp(3.4rem, 8vw, 6.4rem);
+  line-height: 0.95;
+  letter-spacing: 0.015em;
+}
+
+.hero-divider {
+  justify-content: flex-start;
+  max-width: 320px;
+  margin: 1.5rem 0;
+}
+
+.hero-divider::before {
+  display: none;
+}
+
+.hero-divider::after {
+  width: min(220px, 28vw);
+  background: linear-gradient(
+    to right,
+    var(--color-gold-dim),
+    transparent
+  );
+}
+
+.hero-subtitle {
+  max-width: 650px;
+  margin: 0 0 1.15rem;
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  line-height: 1.4;
+}
+
+.hero-copy {
+  max-width: 610px;
+  margin: 0 0 1.6rem;
+  font-size: 1.04rem;
+  line-height: 1.8;
+}
+
+.hero-benefits {
+  max-width: 620px;
+  margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem 1.4rem;
+}
+
+.hero-benefits span {
+  color: var(--color-cream-dim);
+  font-size: 0.94rem;
+  line-height: 1.5;
+}
+
+.hero-benefits span::first-letter {
+  color: var(--color-gold);
+}
+
+.hero-message .hero-actions {
+  justify-content: flex-start;
+}
+
+
+/* Panel derecho */
+
+.hero-register-card {
+  position: relative;
+  width: 100%;
+  padding: clamp(1.65rem, 3vw, 2.4rem);
+  border: 1px solid rgba(232, 201, 107, 0.22);
+  border-radius: 18px;
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(124, 58, 237, 0.2),
+      transparent 55%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(27, 15, 54, 0.92),
+      rgba(8, 4, 19, 0.94)
+    );
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.42),
+    0 0 45px rgba(124, 58, 237, 0.09);
+  backdrop-filter: blur(16px);
+}
+
+.hero-register-card .section-eyebrow {
+  margin-bottom: 0.8rem;
+}
+
+.hero-register-card h2 {
+  margin-bottom: 0.85rem;
+  color: var(--color-cream);
+  font-size: clamp(1.8rem, 3vw, 2.45rem);
+  font-weight: 500;
+  line-height: 1.15;
+}
+
+.hero-register-copy {
+  margin-bottom: 1.5rem;
+  color: var(--color-cream-dim);
+  font-size: 0.96rem;
+  line-height: 1.7;
+}
+
+.hero-email-form {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.hero-email-label {
+  color: var(--color-gold-dim);
+  font-family: var(--font-sacred);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.hero-email-input {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 1rem;
+  border: 1px solid rgba(201, 168, 76, 0.24);
+  border-radius: 5px;
+  outline: none;
+  color: var(--color-cream);
+  background: rgba(255, 255, 255, 0.055);
+  font-family: var(--font-whisper);
+  font-size: 1rem;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease;
+}
+
+.hero-email-input::placeholder {
+  color: rgba(200, 185, 154, 0.45);
+}
+
+.hero-email-input:focus {
+  border-color: rgba(232, 201, 107, 0.62);
+  background: rgba(255, 255, 255, 0.075);
+  box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.09);
+}
+
+.hero-email-submit {
+  width: 100%;
+  min-height: 50px;
+  margin-top: 0.2rem;
+}
+
+.hero-email-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.hero-email-status {
+  display: none;
+  margin-top: 0.85rem;
+  color: var(--color-gold-bright);
+  font-size: 0.84rem;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.hero-email-status.is-visible {
+  display: block;
+}
+
+.hero-email-status[data-status="error"] {
+  color: #ffb4b4;
+}
+
+.hero-register-separator {
+  position: relative;
+  margin: 1.45rem 0 1rem;
+  text-align: center;
+}
+
+.hero-register-separator::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(201, 168, 76, 0.2),
+    transparent
+  );
+}
+
+.hero-register-separator span {
+  position: relative;
+  padding: 0 0.8rem;
+  color: rgba(200, 185, 154, 0.68);
+  background: #0d071d;
+  font-size: 0.76rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-register-card .google-hero-access {
+  width: 100%;
+  margin: 0;
+}
+
+.hero-register-card .google-access-button-container {
+  width: 100%;
+}
+
+.hero-register-note {
+  margin-top: 1rem;
+  color: rgba(200, 185, 154, 0.66);
+  font-size: 0.78rem;
+  line-height: 1.55;
+  text-align: center;
+}
+
+
+/* El círculo queda como ambiente, no detrás del título completo */
+
+.hero .moon-circle {
+  left: 27%;
+  width: min(580px, 62vw);
+  height: min(580px, 62vw);
+  opacity: 0.42;
+}
+
+.hero .ring-one {
+  left: 27%;
+  width: min(700px, 78vw);
+  height: min(700px, 78vw);
+}
+
+.hero .ring-two {
+  left: 27%;
+  width: min(840px, 94vw);
+  height: min(840px, 94vw);
+}
+
+
+/* Tablet */
+
+@media (max-width: 960px) {
+  .hero {
+    min-height: auto;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+
+  .hero-shell {
+    grid-template-columns: 1fr;
+    gap: 3.25rem;
+    max-width: 720px;
+  }
+
+  .hero-message {
+    text-align: center;
+  }
+
+  .hero-divider,
+  .hero-message .hero-actions {
+    justify-content: center;
+  }
+
+  .hero-divider {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-divider::before {
+    display: block;
+  }
+
+  .hero-divider::after {
+    background: linear-gradient(
+      to left,
+      transparent,
+      var(--color-gold-dim)
+    );
+  }
+
+  .hero-subtitle,
+  .hero-copy {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-benefits {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+  }
+
+  .hero .moon-circle,
+  .hero .ring-one,
+  .hero .ring-two {
+    left: 50%;
+  }
+}
+
+
+/* Móvil */
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 5rem 1rem 4rem;
+  }
+
+  .hero-shell {
+    gap: 2.5rem;
+  }
+
+  .hero-content h1 {
+    font-size: clamp(3rem, 18vw, 4.5rem);
+  }
+
+  .hero-benefits {
+    grid-template-columns: 1fr;
+    max-width: 330px;
+  }
+
+  .hero-register-card {
+    padding: 1.5rem 1.15rem;
+    border-radius: 15px;
+  }
+
+  .hero-message .hero-actions {
+    align-items: center;
+  }
+
+  .hero-message .btn-ritual-outline {
+    width: min(100%, 330px);
+  }
+}
+
 -------------------------------------------------------
