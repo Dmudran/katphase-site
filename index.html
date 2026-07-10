@@ -498,10 +498,13 @@
       <button class="access-success-close" type="button" data-close-access-success aria-label="Cerrar mensaje">×</button>
 
       <div class="success-orb" aria-hidden="true">✦</div>
-      <h2 class="font-sacred">Solicitud recibida</h2>
+      <h2 class="font-sacred">¡Solicitud recibida!</h2>
       <p>
-        Usaremos el Gmail registrado para agregarte a la lista de testers de KatPhase.
-        Recibirás pronto el link de Google Play y las instrucciones para descargar la app.
+        Tu Gmail quedó registrado para solicitar acceso anticipado a KatPhase.
+      </p>
+      <p>
+        Solo falta un último paso: agregaremos tu cuenta a la lista de testers
+        y te enviaremos el enlace de Google Play lo antes posible.
       </p>
       <p class="success-email" id="accessSuccessEmail"></p>
     </div>
@@ -606,7 +609,7 @@
 
 
     const GOOGLE_CLIENT_ID = "669886085587-8ucetdqkjgibcqasea43dd0hajvjo3h5.apps.googleusercontent.com";
-    const accessSuccessMessage = "Solicitud recibida ✨ Usaremos el Gmail registrado para agregarte a la lista de testers de KatPhase. Recibirás pronto el link de Google Play y las instrucciones para descargar la app.";
+    const accessSuccessMessage = "¡Solicitud recibida! ✨ Tu Gmail quedó registrado. Solo falta un último paso: agregaremos tu cuenta a la lista de testers y te enviaremos el enlace de Google Play lo antes posible.";
 
     const googleAccessButtonContainer = document.getElementById("googleAccessButtonContainer");
     const googleAccessStatus = document.getElementById("googleAccessStatus");
@@ -880,9 +883,13 @@ if (heroEmailAccessForm && heroAccessEmail && heroEmailSubmit) {
           katphaseFormStatus.classList.add("is-visible");
         }
 
+        const submittedEmail =
+          katphaseForm.querySelector('input[name="entry.1143592437"]')?.value.trim() || "";
+
         window.setTimeout(() => {
           katphaseForm.reset();
           lockKatphaseForm();
+          openAccessSuccessModal(submittedEmail);
         }, 900);
       });
     }
