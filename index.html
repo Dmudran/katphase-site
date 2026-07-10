@@ -753,6 +753,87 @@
 
     window.addEventListener("load", () => initGoogleAccessButton());
 
+    const heroEmailAccessForm = document.getElementById("heroEmailAccessForm");
+const heroAccessEmail = document.getElementById("heroAccessEmail");
+const heroEmailSubmit = document.getElementById("heroEmailSubmit");
+const heroEmailStatus = document.getElementById("heroEmailStatus");
+
+const heroEmailStorageKey = "katphase_hero_email_request_sent";
+const heroEmailValueStorageKey = "katphase_hero_email_registered";
+
+function setHeroEmailStatus(message, type = "success") {
+  if (!heroEmailStatus) return;
+
+  heroEmailStatus.textContent = message || "";
+  heroEmailStatus.dataset.status = type;
+  heroEmailStatus.classList.toggle("is-visible", Boolean(message));
+}
+
+function lockHeroEmailForm(email) {
+  if (!heroEmailSubmit || !heroAccessEmail) return;
+
+  heroAccessEmail.disabled = true;
+  heroEmailSubmit.disabled = true;
+  heroEmailSubmit.textContent = "Solicitud enviada";
+
+  setHeroEmailStatus(
+    email
+      ? `Ya recibimos una solicitud con ${email}.`
+      : "Ya recibimos tu solicitud.",
+    "success"
+  );
+}
+
+if (heroEmailAccessForm && heroAccessEmail && heroEmailSubmit) {
+  const previousHeroEmail = localStorage.getItem(heroEmailValueStorageKey);
+
+  if (
+    localStorage.getItem(heroEmailStorageKey) === "true" &&
+    previousHeroEmail
+  ) {
+    heroAccessEmail.value = previousHeroEmail;
+    lockHeroEmailForm(previousHeroEmail);
+  }
+
+  heroEmailAccessForm.addEventListener("submit", (event) => {
+    if (!heroEmailAccessForm.checkValidity()) {
+      return;
+    }
+
+    const email = heroAccessEmail.value.trim();
+
+    if (!email) {
+      event.preventDefault();
+      setHeroEmailStatus(
+        "Ingresa el Gmail que utilizas en Google Play.",
+        "error"
+      );
+      return;
+    }
+
+    if (localStorage.getItem(heroEmailStorageKey) === "true") {
+      event.preventDefault();
+      lockHeroEmailForm(
+        localStorage.getItem(heroEmailValueStorageKey)
+      );
+      return;
+    }
+
+    localStorage.setItem(heroEmailStorageKey, "true");
+    localStorage.setItem(heroEmailValueStorageKey, email);
+
+    heroEmailSubmit.disabled = true;
+    heroEmailSubmit.textContent = "Enviando...";
+
+    setHeroEmailStatus("Enviando tu solicitud...", "success");
+
+    window.setTimeout(() => {
+      lockHeroEmailForm(email);
+      openAccessSuccessModal(email);
+    }, 900);
+  });
+}
+
 
     const katphaseForm = document.getElementById("katphaseAccessForm");
     const katphaseFormSubmit = document.getElementById("katphaseFormSubmit");
