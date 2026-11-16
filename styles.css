@@ -1314,4 +1314,13 @@ body.access-success-modal-open {
   }
 }
 
--------------------------------------------------------
+
+/* Portada de presentación: una columna tras retirar el registro. */
+.hero-shell { grid-template-columns: minmax(0, 1fr); max-width: 900px; }
+.hero-message { text-align: center; }
+.hero-divider, .hero-message .hero-actions { justify-content: center; }
+.hero-divider { margin-left: auto; margin-right: auto; }
+.hero-divider::before { display: block; }
+.hero-subtitle, .hero-copy, .hero-benefits { margin-left: auto; margin-right: auto; }
+.hero-benefits { text-align: left; }
+.hero .moon-circle, .hero .ring-one, .hero .ring-two { left: 50%; }
